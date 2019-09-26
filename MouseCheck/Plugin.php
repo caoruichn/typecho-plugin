@@ -19,7 +19,7 @@ class MouseCheck_Plugin implements Typecho_Plugin_Interface
     public static function activate()
     {
 	Typecho_Plugin::factory('Widget_Archive')->header = array('MouseCheck_Plugin', 'header');
-	Typecho_Plugin::factory('Widget_Archive')->header = array('MouseCheck_Plugin', 'footer');
+	Typecho_Plugin::factory('Widget_Archive')->footer = array('MouseCheck_Plugin', 'footer');
     }
     
     /**
