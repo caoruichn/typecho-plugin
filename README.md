@@ -2,7 +2,7 @@
 根据示例制作的简单的typecho插件。
 
 ## 目录  
-[TOC]
+[toc]
 
 ## 预览  
 在线演示：[caorui.top/ddblog](caorui.top/ddblog)  
