@@ -1,5 +1,5 @@
 # typecho-plugin  
-刚接触typecho，根据示例学习制作插件。  
+刚接触typecho，根据示例学习制作插件(仅在typecho 1.1上测试)。  
 - `MouseCheck`：鼠标点击时按顺序显示设置的文字，颜色从设置中随机获取。  
 - ...
 
