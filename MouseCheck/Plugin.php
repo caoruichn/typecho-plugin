@@ -18,8 +18,8 @@ class MouseCheck_Plugin implements Typecho_Plugin_Interface
      */
     public static function activate()
     {
-        Typecho_Plugin::factory('index.php')->begin = array('MouseCheck_Plugin', 'header');
-        Typecho_Plugin::factory('index.php')->begin = array('MouseCheck_Plugin', 'footer');
+	Typecho_Plugin::factory('Widget_Archive')->header = array('MouseCheck_Plugin', 'header');
+	Typecho_Plugin::factory('Widget_Archive')->header = array('MouseCheck_Plugin', 'footer');
     }
     
     /**
@@ -64,48 +64,40 @@ class MouseCheck_Plugin implements Typecho_Plugin_Interface
      * @return void
      */
     public static function header(){
-        //$Colors = Typecho_Widget::widget('Widget_Options')->plugin('MouseCheck')->strcolor;
-        //$arrColor = explode(",", $Colors);
-        //$arrSize =  sizeof($arrColor)-1;
-        //$indexColor = mt_rand(0,$arrSize);
-        //$clickColor = $arrColor[$indexColor];
-        //if( empty($clickColor) ){
-        //    $clickColor = 'red';
-        //}
         echo <<<EOF
-<!-- mousecheck Start -->
-<style>
-    .text-popup {
-		animation: textPopup 1s;
-		color: red;
-		user-select: none;
-		white-space: nowrap;
-		position: absolute;
-		z-index: 99;
-    }
-    @keyframes textPopup {
-		100% { opacity: 0; }
-		5% { opacity: 1; }
-		100% { transform: translateY(-50px); }
-	}
-	@-moz-keyframes textPopup {
-		100% { opacity: 0; }
-		5% { opacity: 1; }
-		100% { transform: translateY(-50px); }
-	}
-	@-webkit-keyframes textPopup {
-		100% { opacity: 0; }
-		5% { opacity: 1; }
-		100% { transform: translateY(-50px); }
-	}
-	@-o-keyframes textPopup {
-		100% { opacity: 0; }
-		5% { opacity: 1; }
-		100% { transform: translateY(-50px); }
-	}
-</style>
-<!-- mousecheck End -->
-EOF;
+		<!-- mousecheck Start -->
+		<style>
+		    .text-popup {
+				animation: textPopup 1s;
+				color: red;
+				user-select: none;
+				white-space: nowrap;
+				position: absolute;
+				z-index: 99;
+		    }
+		    @keyframes textPopup {
+				100% { opacity: 0; }
+				5% { opacity: 1; }
+				100% { transform: translateY(-50px); }
+			}
+			@-moz-keyframes textPopup {
+				100% { opacity: 0; }
+				5% { opacity: 1; }
+				100% { transform: translateY(-50px); }
+			}
+			@-webkit-keyframes textPopup {
+				100% { opacity: 0; }
+				5% { opacity: 1; }
+				100% { transform: translateY(-50px); }
+			}
+			@-o-keyframes textPopup {
+				100% { opacity: 0; }
+				5% { opacity: 1; }
+				100% { transform: translateY(-50px); }
+			}
+		</style>
+		<!-- mousecheck End -->
+		EOF;
     }
     /**
      * 输出底部
@@ -118,58 +110,58 @@ EOF;
         $stringContent = Typecho_Widget::widget('Widget_Options')->plugin('MouseCheck')->content;
         $strColors = Typecho_Widget::widget('Widget_Options')->plugin('MouseCheck')->strcolor;
         echo <<<EOF
-<!-- mousecheck Start -->
-    <script>
-        var fnTextPopup = function(arr, arrcolor) {
-            if({$checkState} != '1'){
-                return;
-            }
-            // arr参数是必须的
-            if(!arr || !arr.length) {
-                return;
-            }
-            if(!arrcolor || !arrcolor.length) {
-                arrcolor = ['red'];
-            }
-            var sizecolor = arrcolor.length-1;
-            // 主逻辑
-            var index = 0;
-            document.documentElement.addEventListener('click', function(event) {
-                var x = event.pageX,
-                    y = event.pageY;
-                var indexcolor = parseInt(Math.random()*(sizecolor+1),10);
-                var clickcolor = arrcolor[indexcolor];
-                var eleText = document.createElement('span');
-                eleText.className = 'text-popup';
-                if(clickcolor){
-                    eleText.style.color = clickcolor;
-                }
-                this.appendChild(eleText);
-                if(arr[index]) {
-                    eleText.innerHTML = arr[index];
-                } else {
-                    index = 0;
-                    eleText.innerHTML = arr[0];
-                }
-                // 动画结束后删除自己
-                eleText.addEventListener('animationend', function() {
-                    eleText.parentNode.removeChild(eleText);
-                });
-                // 位置
-                eleText.style.left = (x - eleText.clientWidth / 2) + 'px';
-                eleText.style.top = (y - eleText.clientHeight) + 'px';
-                // index递增
-                index++;
-            });
-        };
-        var strcolor = '{$strColors}';
-        var arrc = strcolor.split(',');
+	    <!-- mousecheck Start -->
+	    <script>
+		var fnTextPopup = function(arr, arrcolor) {
+		    if({$checkState} != '1'){
+			return;
+		    }
+		    // arr参数是必须的
+		    if(!arr || !arr.length) {
+			return;
+		    }
+		    if(!arrcolor || !arrcolor.length) {
+			arrcolor = ['red'];
+		    }
+		    var sizecolor = arrcolor.length-1;
+		    // 主逻辑
+		    var index = 0;
+		    document.documentElement.addEventListener('click', function(event) {
+			var x = event.pageX,
+			    y = event.pageY;
+			var indexcolor = parseInt(Math.random()*(sizecolor+1),10);
+			var clickcolor = arrcolor[indexcolor];
+			var eleText = document.createElement('span');
+			eleText.className = 'text-popup';
+			if(clickcolor){
+			    eleText.style.color = clickcolor;
+			}
+			this.appendChild(eleText);
+			if(arr[index]) {
+			    eleText.innerHTML = arr[index];
+			} else {
+			    index = 0;
+			    eleText.innerHTML = arr[0];
+			}
+			// 动画结束后删除自己
+			eleText.addEventListener('animationend', function() {
+			    eleText.parentNode.removeChild(eleText);
+			});
+			// 位置
+			eleText.style.left = (x - eleText.clientWidth / 2) + 'px';
+			eleText.style.top = (y - eleText.clientHeight) + 'px';
+			// index递增
+			index++;
+		    });
+		};
+		var strcolor = '{$strColors}';
+		var arrc = strcolor.split(',');
 
-        var str = '{$stringContent}'
-        var arra = str.split(',');
-        fnTextPopup(arra, arrc);
-    </script>
-<!-- mousecheck End -->
-EOF;
+		var str = '{$stringContent}'
+		var arra = str.split(',');
+		fnTextPopup(arra, arrc);
+	    </script>
+	<!-- mousecheck End -->
+	EOF;
     }
 }
